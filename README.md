@@ -164,15 +164,15 @@ SafeAway is released under the MIT License. See [LICENSE](LICENSE) for details.
 
 ## 📞 Support & Contact
 
-- 🐛 **Issues**: [GitHub Issues](https://github.com/yourusername/safeaway/issues)
-- 💬 **Discussions**: [GitHub Discussions](https://github.com/yourusername/safeaway/discussions)
-- 📧 **Email**: support@safeaway.app
-- 🐦 **Twitter**: [@SafeAwayApp](https://twitter.com/safeawayapp)
+- 🐛 **Issues**: [GitHub Issues](https://github.com/Yrzhe/safeaway/issues)
+- 💬 **Discussions**: [GitHub Discussions](https://github.com/Yrzhe/safeaway/discussions)
+- 📧 **Email**: love@yrzhe.space
+- 🐦 **Twitter**: [@yrzhe_top](https://x.com/yrzhe_top)
 
 ---
 
 <div align="center">
-  
+
 **Built with ❤️ for Mac users who value their privacy and security**
 
 *Stay Safe, Stay Away from prying eyes!* 🛡️

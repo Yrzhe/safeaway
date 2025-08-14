@@ -164,15 +164,14 @@ SafeAway 基于 MIT 许可证发布。详见 [LICENSE](LICENSE) 文件。
 
 ## 📞 支持与联系
 
-- 🐛 **问题反馈**：[GitHub Issues](https://github.com/yourusername/safeaway/issues)
+- 🐛 **问题反馈**：[GitHub Issues](https://github.com/Yrzhe/safeaway/issues)
 - 💬 **讨论**：[GitHub Discussions](https://github.com/yourusername/safeaway/discussions)
-- 📧 **邮箱**：support@safeaway.app
-- 🐦 **推特**：[@SafeAwayApp](https://twitter.com/safeawayapp)
+- 📧 **邮箱**：love@yrzhe.space
+- 🐦 **推特**：[@yrzhe_top](https://x.com/yrzhe_top)
 
 ---
 
 <div align="center">
-  
 **为重视隐私和安全的 Mac 用户用心打造 ❤️**
 
 *远离窥探，保持安全！* 🛡️
