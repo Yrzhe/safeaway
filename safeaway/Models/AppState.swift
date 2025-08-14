@@ -86,24 +86,24 @@ class AppState: ObservableObject {
     }
     
     func getStatusSummary() -> String {
-        var summary = "SafeAway 状态\n"
-        summary += "监控: \(isMonitoring ? "开启" : "关闭")\n"
-        summary += "摄像头: \(systemStatus.isCameraAvailable ? "可用" : "不可用")\n"
-        summary += "Telegram: \(systemStatus.isTelegramConfigured ? "已配置" : "未配置")\n"
-        summary += "网络: \(systemStatus.isNetworkAvailable ? "在线" : "离线")\n"
-        summary += "系统状态: \(systemStatus.currentState)\n"
-        summary += "捕获次数: \(captureCount)\n"
-        summary += "待上传: \(uploadQueueCount)\n"
+        var summary = "\(L[LocalizedStringKey.appName]) \(L[LocalizedStringKey.status])\n"
+        summary += "\(L[LocalizedStringKey.monitoring]): \(isMonitoring ? L[LocalizedStringKey.monitoring] : L[LocalizedStringKey.notStarted])\n"
+        summary += "\(L[LocalizedStringKey.camera]): \(systemStatus.isCameraAvailable ? L[LocalizedStringKey.authorized] : L[LocalizedStringKey.unauthorized])\n"
+        summary += "Telegram: \(systemStatus.isTelegramConfigured ? L[LocalizedStringKey.configured] : L[LocalizedStringKey.notConfigured])\n"
+        summary += "Network: \(systemStatus.isNetworkAvailable ? "Online" : "Offline")\n"
+        summary += "System State: \(systemStatus.currentState)\n"
+        summary += "\(L[LocalizedStringKey.captureCount]): \(captureCount)\n"
+        summary += "Upload Queue: \(uploadQueueCount)\n"
         
         if let lastCapture = lastCaptureTime {
             let formatter = DateFormatter()
             formatter.dateStyle = .short
             formatter.timeStyle = .medium
-            summary += "最后捕获: \(formatter.string(from: lastCapture))\n"
+            summary += "\(L[LocalizedStringKey.lastCapture]): \(formatter.string(from: lastCapture))\n"
         }
         
         if let error = lastError {
-            summary += "错误: \(error)\n"
+            summary += "\(L[LocalizedStringKey.error]): \(error)\n"
         }
         
         return summary

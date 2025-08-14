@@ -97,7 +97,7 @@ class PermissionManager: ObservableObject {
         case .denied, .restricted:
             hasCameraPermission = false
             completion(false)
-            showPermissionAlert(for: "摄像头")
+            showPermissionAlert(for: L[LocalizedStringKey.camera])
         @unknown default:
             completion(false)
         }
@@ -118,7 +118,7 @@ class PermissionManager: ObservableObject {
         case .denied, .restricted:
             hasMicrophonePermission = false
             completion(false)
-            showPermissionAlert(for: "麦克风")
+            showPermissionAlert(for: L[LocalizedStringKey.microphone])
         @unknown default:
             completion(false)
         }
@@ -128,7 +128,7 @@ class PermissionManager: ObservableObject {
         if locationManager.authorizationStatus == .notDetermined {
             locationManager.requestAlwaysAuthorization()
         } else if locationManager.authorizationStatus == .denied {
-            showPermissionAlert(for: "位置")
+            showPermissionAlert(for: L[LocalizedStringKey.location])
         }
     }
     
@@ -139,11 +139,11 @@ class PermissionManager: ObservableObject {
     private func showPermissionAlert(for permission: String) {
         DispatchQueue.main.async {
             let alert = NSAlert()
-            alert.messageText = "\(permission)权限被拒绝"
-            alert.informativeText = "SafeAway 需要\(permission)权限才能正常工作。请在系统设置中授予权限。"
+            alert.messageText = "\(permission) \(L[LocalizedStringKey.permissionDenied])"
+            alert.informativeText = "SafeAway \(L[LocalizedStringKey.permissionRequired])"
             alert.alertStyle = .warning
-            alert.addButton(withTitle: "打开系统设置")
-            alert.addButton(withTitle: "取消")
+            alert.addButton(withTitle: L[LocalizedStringKey.openSystemSettings])
+            alert.addButton(withTitle: L[LocalizedStringKey.cancel])
             
             if alert.runModal() == .alertFirstButtonReturn {
                 self.openSystemPreferences()
@@ -154,18 +154,11 @@ class PermissionManager: ObservableObject {
     private func showScreenRecordingInstructions() {
         DispatchQueue.main.async {
             let alert = NSAlert()
-            alert.messageText = "需要屏幕录制权限"
-            alert.informativeText = """
-            请按照以下步骤授权：
-            1. 打开系统设置
-            2. 前往「隐私与安全性」
-            3. 选择「屏幕录制」
-            4. 勾选 SafeAway
-            5. 重启应用
-            """
+            alert.messageText = L[LocalizedStringKey.needScreenPermission]
+            alert.informativeText = L[LocalizedStringKey.screenPermissionInstructions]
             alert.alertStyle = .informational
-            alert.addButton(withTitle: "打开系统设置")
-            alert.addButton(withTitle: "稍后")
+            alert.addButton(withTitle: L[LocalizedStringKey.openSystemSettings])
+            alert.addButton(withTitle: L[LocalizedStringKey.later])
             
             if alert.runModal() == .alertFirstButtonReturn {
                 self.openSystemPreferences()
@@ -191,21 +184,11 @@ class PermissionManager: ObservableObject {
     private func showOnboarding() {
         DispatchQueue.main.async {
             let alert = NSAlert()
-            alert.messageText = "欢迎使用 SafeAway"
-            alert.informativeText = """
-            SafeAway 是一款安全监控应用，可以在您离开电脑时自动进行安防取证。
-            
-            主要功能：
-            • 息屏/锁屏时自动拍照
-            • 检测人形和运动
-            • 通过 Telegram Bot 发送通知
-            • 本地加密存储
-            
-            接下来将请求必要的系统权限。
-            """
+            alert.messageText = L[LocalizedStringKey.welcomeTitle]
+            alert.informativeText = L[LocalizedStringKey.welcomeMessage]
             alert.alertStyle = .informational
-            alert.addButton(withTitle: "开始设置")
-            alert.addButton(withTitle: "稍后")
+            alert.addButton(withTitle: L[LocalizedStringKey.startSetup])
+            alert.addButton(withTitle: L[LocalizedStringKey.later])
             
             if alert.runModal() == .alertFirstButtonReturn {
                 self.requestAllPermissions()

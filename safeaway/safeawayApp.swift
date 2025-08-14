@@ -31,6 +31,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationDidFinishLaunching(_ notification: Notification) {
         NSApp.setActivationPolicy(.accessory)
         
+        // Initialize localization
+        _ = BundleManager.shared
+        
         setupStatusBar()
         initializeServices()
         requestPermissions()
@@ -59,20 +62,20 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     private func setupMenu() {
         statusBarMenu = NSMenu()
         
-        monitoringMenuItem = NSMenuItem(title: "开启监控", action: #selector(toggleMonitoring), keyEquivalent: "")
+        monitoringMenuItem = NSMenuItem(title: L[LocalizedStringKey.startMonitoring], action: #selector(toggleMonitoring), keyEquivalent: "")
         monitoringMenuItem.target = self
         updateMonitoringMenuItemTitle()
         
-        let settingsMenuItem = NSMenuItem(title: "设置...", action: #selector(showSettings), keyEquivalent: ",")
+        let settingsMenuItem = NSMenuItem(title: L[LocalizedStringKey.settings], action: #selector(showSettings), keyEquivalent: ",")
         settingsMenuItem.target = self
         
-        let testMenuItem = NSMenuItem(title: "测试拍照", action: #selector(testCapture), keyEquivalent: "")
+        let testMenuItem = NSMenuItem(title: L[LocalizedStringKey.testCapture], action: #selector(testCapture), keyEquivalent: "")
         testMenuItem.target = self
         
-        let aboutMenuItem = NSMenuItem(title: "关于 SafeAway", action: #selector(showAbout), keyEquivalent: "")
+        let aboutMenuItem = NSMenuItem(title: L[LocalizedStringKey.about], action: #selector(showAbout), keyEquivalent: "")
         aboutMenuItem.target = self
         
-        let quitMenuItem = NSMenuItem(title: "退出 SafeAway", action: #selector(quitApp), keyEquivalent: "q")
+        let quitMenuItem = NSMenuItem(title: L[LocalizedStringKey.quit], action: #selector(quitApp), keyEquivalent: "q")
         quitMenuItem.target = self
         
         statusBarMenu.addItem(monitoringMenuItem)
@@ -103,7 +106,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     private func updateMonitoringMenuItemTitle() {
         let isMonitoring = AppState.shared.isMonitoring
-        monitoringMenuItem.title = isMonitoring ? "关闭监控" : "开启监控"
+        monitoringMenuItem.title = isMonitoring ? L[LocalizedStringKey.stopMonitoring] : L[LocalizedStringKey.startMonitoring]
     }
     
     private func initializeServices() {
@@ -188,28 +191,27 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     @objc func showAbout() {
         let alert = NSAlert()
-        alert.messageText = "SafeAway"
+        alert.messageText = L[LocalizedStringKey.appName]
         alert.informativeText = """
-        版本 1.0.0
+        \(L[LocalizedStringKey.version]) 1.0.0
         
-        SafeAway 是一款 macOS 安全监控应用
-        可在您离开电脑时自动进行安防取证
+        \(L[LocalizedStringKey.welcomeMessage].replacingOccurrences(of: "\\n\\n", with: "\n").replacingOccurrences(of: "\\n", with: "\n").components(separatedBy: "\n\n")[0])
         
         © 2024 SafeAway
         """
         alert.alertStyle = .informational
-        alert.addButton(withTitle: "确定")
+        alert.addButton(withTitle: L[LocalizedStringKey.ok])
         alert.runModal()
     }
     
     @objc func quitApp() {
         if AppState.shared.isMonitoring {
             let alert = NSAlert()
-            alert.messageText = "确认退出"
-            alert.informativeText = "监控正在运行中，确定要退出吗？"
+            alert.messageText = L[LocalizedStringKey.confirmExit]
+            alert.informativeText = L[LocalizedStringKey.exitWhileMonitoring]
             alert.alertStyle = .warning
-            alert.addButton(withTitle: "退出")
-            alert.addButton(withTitle: "取消")
+            alert.addButton(withTitle: L[LocalizedStringKey.exit])
+            alert.addButton(withTitle: L[LocalizedStringKey.cancel])
             
             if alert.runModal() == .alertFirstButtonReturn {
                 AppState.shared.stopMonitoring()

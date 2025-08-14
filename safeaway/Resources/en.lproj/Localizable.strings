@@ -1,0 +1,120 @@
+/* General */
+"app_name" = "SafeAway";
+"start_monitoring" = "Start Monitoring";
+"stop_monitoring" = "Stop Monitoring";
+"settings" = "Settings...";
+"test_capture" = "Test Capture";
+"about" = "About SafeAway";
+"quit" = "Quit SafeAway";
+"monitoring" = "Monitoring";
+"not_started" = "Not Started";
+"ok" = "OK";
+"cancel" = "Cancel";
+"warning" = "Warning";
+"error" = "Error";
+"info" = "Info";
+"success" = "Success";
+"failed" = "Failed";
+"hint" = "Hint";
+
+/* Status */
+"status" = "Status";
+"camera_permission" = "Camera Permission:";
+"authorized" = "Authorized";
+"unauthorized" = "Unauthorized";
+"telegram_connection" = "Telegram Connection:";
+"configured" = "Configured";
+"not_configured" = "Not Configured";
+"last_capture" = "Last Capture:";
+"capture_count" = "Capture Count:";
+
+/* Settings - General */
+"general" = "General";
+"launch_at_login" = "Launch at Login";
+"auto_start_monitoring" = "Auto Start Monitoring";
+"self_test" = "Self Test";
+"cancel_test" = "Cancel Test";
+"test_unlock_recording" = "Test Unlock Recording";
+"clear_stats" = "Clear Stats";
+"language" = "Language";
+"select_language" = "Select Language";
+
+/* Settings - Capture */
+"capture" = "Capture";
+"capture_settings" = "Capture Settings";
+"lock_screen_capture_interval" = "Lock Screen Capture Interval";
+"wake_video_length" = "Wake Video Length";
+"capture_interval" = "Capture Interval";
+"video_duration" = "Video Duration";
+"enable_screen_recording" = "Enable Screen Recording";
+"image_format" = "Image Format";
+"video_quality" = "Video Quality";
+"seconds" = "seconds";
+
+/* Settings - Detection */
+"detection" = "Detection";
+"human_detection" = "Human Detection";
+"enable_human_detection" = "Enable Human Detection";
+"confidence_threshold" = "Confidence Threshold";
+"motion_detection" = "Motion Detection";
+"enable_motion_detection" = "Enable Motion Detection";
+"sensitivity" = "Sensitivity";
+"environment_change" = "Environment Change";
+"enable_environment_detection" = "Enable Environment Detection";
+
+/* Settings - Upload */
+"upload" = "Upload";
+"telegram_bot_config" = "Telegram Bot Configuration";
+"save_config" = "Save Configuration";
+"test_connection" = "Test Connection";
+"send_options" = "Send Options";
+"save_before_sending" = "Save Before Sending";
+"use_proxy" = "Use Proxy";
+"proxy_address" = "Proxy Address";
+"config_saved" = "Configuration Saved";
+"connection_success" = "Connection Successful";
+"connection_failed" = "Connection Failed, Please Check Configuration";
+
+/* Settings - Privacy */
+"privacy" = "Privacy";
+"local_storage" = "Local Storage";
+"encrypt_local_storage" = "Encrypt Local Storage";
+"delete_after_sending" = "Delete After Sending";
+"retention_days" = "Retention Days";
+"days" = "days";
+"data_security" = "Data Security";
+"clear_all_data" = "Clear All Local Data";
+
+/* Settings - Advanced */
+"advanced" = "Advanced";
+"logs" = "Logs";
+"log_level" = "Log Level";
+"debug" = "Debug";
+"export_logs" = "Export Logs";
+"diagnostics" = "Diagnostics";
+"trigger_test_capture" = "Trigger Test Capture";
+"test_wake_recording" = "Test Wake Recording";
+"view_system_info" = "View System Info";
+
+/* Permissions */
+"permission_denied" = "Permission Denied";
+"permission_required" = "Permission Required";
+"open_system_settings" = "Open System Settings";
+"later" = "Later";
+"camera" = "Camera";
+"microphone" = "Microphone";
+"location" = "Location";
+"screen_recording" = "Screen Recording";
+"need_screen_permission" = "Screen Recording Permission Required";
+"screen_permission_instructions" = "Please follow these steps:\n1. Open System Settings\n2. Go to Privacy & Security\n3. Select Screen Recording\n4. Check SafeAway\n5. Restart the app";
+
+/* Welcome & About */
+"welcome_title" = "Welcome to SafeAway";
+"welcome_message" = "SafeAway is a security monitoring app that automatically captures evidence when you're away from your computer.\n\nKey Features:\n• Auto capture when screen is locked/off\n• Human and motion detection\n• Telegram Bot notifications\n• Encrypted local storage\n\nNext, we'll request necessary system permissions.";
+"start_setup" = "Start Setup";
+"version" = "Version";
+
+/* Exit Confirmation */
+"confirm_exit" = "Confirm Exit";
+"exit_while_monitoring" = "Monitoring is running. Are you sure you want to exit?";
+"exit" = "Exit";

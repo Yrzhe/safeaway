@@ -1,0 +1,120 @@
+/* General */
+"app_name" = "SafeAway";
+"start_monitoring" = "开启监控";
+"stop_monitoring" = "关闭监控";
+"settings" = "设置...";
+"test_capture" = "测试拍照";
+"about" = "关于 SafeAway";
+"quit" = "退出 SafeAway";
+"monitoring" = "监控中";
+"not_started" = "未启动";
+"ok" = "确定";
+"cancel" = "取消";
+"warning" = "警告";
+"error" = "错误";
+"info" = "信息";
+"success" = "成功";
+"failed" = "失败";
+"hint" = "提示";
+
+/* Status */
+"status" = "状态";
+"camera_permission" = "摄像头权限:";
+"authorized" = "已授权";
+"unauthorized" = "未授权";
+"telegram_connection" = "Telegram 连接:";
+"configured" = "已配置";
+"not_configured" = "未配置";
+"last_capture" = "最后捕获:";
+"capture_count" = "捕获次数:";
+
+/* Settings - General */
+"general" = "总览";
+"launch_at_login" = "开机自动启动";
+"auto_start_monitoring" = "自动开始监控";
+"self_test" = "一键自检";
+"cancel_test" = "取消自检";
+"test_unlock_recording" = "测试解锁录像";
+"clear_stats" = "清除统计";
+"language" = "语言";
+"select_language" = "选择语言";
+
+/* Settings - Capture */
+"capture" = "采集";
+"capture_settings" = "抓拍设置";
+"lock_screen_capture_interval" = "息屏/锁屏抓拍间隔";
+"wake_video_length" = "唤醒录影时长";
+"capture_interval" = "抓拍间隔";
+"video_duration" = "录影时长";
+"enable_screen_recording" = "启用录屏功能";
+"image_format" = "图片格式";
+"video_quality" = "视频质量";
+"seconds" = "秒";
+
+/* Settings - Detection */
+"detection" = "检测";
+"human_detection" = "人形检测";
+"enable_human_detection" = "启用人形检测";
+"confidence_threshold" = "置信度阈值";
+"motion_detection" = "运动检测";
+"enable_motion_detection" = "启用运动检测";
+"sensitivity" = "灵敏度";
+"environment_change" = "环境变化";
+"enable_environment_detection" = "启用环境变化检测";
+
+/* Settings - Upload */
+"upload" = "上报";
+"telegram_bot_config" = "Telegram Bot 配置";
+"save_config" = "保存配置";
+"test_connection" = "测试连接";
+"send_options" = "发送选项";
+"save_before_sending" = "发送前先保存到本地";
+"use_proxy" = "使用代理";
+"proxy_address" = "代理地址";
+"config_saved" = "配置已保存";
+"connection_success" = "连接成功";
+"connection_failed" = "连接失败，请检查配置";
+
+/* Settings - Privacy */
+"privacy" = "隐私";
+"local_storage" = "本地存储";
+"encrypt_local_storage" = "本地加密存储";
+"delete_after_sending" = "发送成功后删除本地文件";
+"retention_days" = "本地保留天数";
+"days" = "天";
+"data_security" = "数据安全";
+"clear_all_data" = "清除所有本地数据";
+
+/* Settings - Advanced */
+"advanced" = "高级";
+"logs" = "日志";
+"log_level" = "日志级别";
+"debug" = "调试";
+"export_logs" = "导出日志";
+"diagnostics" = "诊断";
+"trigger_test_capture" = "触发测试抓拍";
+"test_wake_recording" = "测试唤醒录屏";
+"view_system_info" = "查看系统信息";
+
+/* Permissions */
+"permission_denied" = "权限被拒绝";
+"permission_required" = "需要权限";
+"open_system_settings" = "打开系统设置";
+"later" = "稍后";
+"camera" = "摄像头";
+"microphone" = "麦克风";
+"location" = "位置";
+"screen_recording" = "屏幕录制";
+"need_screen_permission" = "需要屏幕录制权限";
+"screen_permission_instructions" = "请按照以下步骤授权：\n1. 打开系统设置\n2. 前往「隐私与安全性」\n3. 选择「屏幕录制」\n4. 勾选 SafeAway\n5. 重启应用";
+
+/* Welcome & About */
+"welcome_title" = "欢迎使用 SafeAway";
+"welcome_message" = "SafeAway 是一款安全监控应用，可以在您离开电脑时自动进行安防取证。\n\n主要功能：\n• 息屏/锁屏时自动拍照\n• 检测人形和运动\n• 通过 Telegram Bot 发送通知\n• 本地加密存储\n\n接下来将请求必要的系统权限。";
+"start_setup" = "开始设置";
+"version" = "版本";
+
+/* Exit Confirmation */
+"confirm_exit" = "确认退出";
+"exit_while_monitoring" = "监控正在运行中，确定要退出吗？";
+"exit" = "退出";

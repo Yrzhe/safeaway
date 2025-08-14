@@ -3,7 +3,12 @@
 <plist version="1.0">
 <dict>
     <key>CFBundleDevelopmentRegion</key>
-    <string>$(DEVELOPMENT_LANGUAGE)</string>
+    <string>en</string>
+    <key>CFBundleLocalizations</key>
+    <array>
+        <string>en</string>
+        <string>zh</string>
+    </array>
     <key>CFBundleExecutable</key>
     <string>$(EXECUTABLE_NAME)</string>
     <key>CFBundleIdentifier</key>
@@ -23,15 +28,15 @@
     <key>LSUIElement</key>
     <true/>
     <key>NSCameraUsageDescription</key>
-    <string>为在您离席时进行安防取证，需要访问摄像头进行抓拍。</string>
+    <string>SafeAway needs camera access to capture security evidence when you're away from your computer.</string>
     <key>NSMicrophoneUsageDescription</key>
-    <string>为录制短视频证据，需要获取麦克风权限。</string>
+    <string>SafeAway needs microphone access to record audio for video evidence.</string>
     <key>NSLocationUsageDescription</key>
-    <string>用于识别设备在不同地点被移动时的异常。</string>
+    <string>SafeAway uses location to detect unusual device movement.</string>
     <key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-    <string>用于识别设备在不同地点被移动时的异常。</string>
+    <string>SafeAway uses location to detect unusual device movement.</string>
     <key>NSLocationAlwaysUsageDescription</key>
-    <string>用于识别设备在不同地点被移动时的异常。</string>
+    <string>SafeAway uses location to detect unusual device movement.</string>
     <key>NSPrincipalClass</key>
     <string>NSApplication</string>
     <key>NSSupportsAutomaticTermination</key>

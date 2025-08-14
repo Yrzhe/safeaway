@@ -2,6 +2,7 @@ import SwiftUI
 
 struct SettingsView: View {
     @StateObject private var settings = AppSettings.shared
+    @StateObject private var localization = LocalizationManager.shared
     @State private var selectedTab = 0
     @State private var showingTestAlert = false
     @State private var testMessage = ""
@@ -10,37 +11,37 @@ struct SettingsView: View {
         TabView(selection: $selectedTab) {
             GeneralSettingsView()
                 .tabItem {
-                    Label("总览", systemImage: "gear")
+                    Label(L[LocalizedStringKey.general], systemImage: "gear")
                 }
                 .tag(0)
             
             CaptureSettingsView()
                 .tabItem {
-                    Label("采集", systemImage: "camera")
+                    Label(L[LocalizedStringKey.capture], systemImage: "camera")
                 }
                 .tag(1)
             
             DetectionSettingsView()
                 .tabItem {
-                    Label("检测", systemImage: "eye")
+                    Label(L[LocalizedStringKey.detection], systemImage: "eye")
                 }
                 .tag(2)
             
             TelegramSettingsView()
                 .tabItem {
-                    Label("上报", systemImage: "paperplane")
+                    Label(L[LocalizedStringKey.upload], systemImage: "paperplane")
                 }
                 .tag(3)
             
             PrivacySettingsView()
                 .tabItem {
-                    Label("隐私", systemImage: "lock")
+                    Label(L[LocalizedStringKey.privacy], systemImage: "lock")
                 }
                 .tag(4)
             
             AdvancedSettingsView()
                 .tabItem {
-                    Label("高级", systemImage: "wrench.and.screwdriver")
+                    Label(L[LocalizedStringKey.advanced], systemImage: "wrench.and.screwdriver")
                 }
                 .tag(5)
         }
@@ -52,24 +53,26 @@ struct SettingsView: View {
 struct GeneralSettingsView: View {
     @StateObject private var settings = AppSettings.shared
     @StateObject private var appState = AppState.shared
+    @StateObject private var localization = LocalizationManager.shared
     @State private var isSelfTesting = false
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 20) {
-            Text("SafeAway 安全监控")
-                .font(.title)
-                .fontWeight(.bold)
+        ScrollView {
+            VStack(alignment: .leading, spacing: 20) {
+                Text(L[LocalizedStringKey.appName])
+                    .font(.title)
+                    .fontWeight(.bold)
             
             HStack {
                 Circle()
                     .fill(appState.isMonitoring ? Color.green : Color.gray)
                     .frame(width: 10, height: 10)
-                Text(appState.isMonitoring ? "监控中" : "未启动")
+                Text(appState.isMonitoring ? L[LocalizedStringKey.monitoring] : L[LocalizedStringKey.notStarted])
                     .foregroundColor(appState.isMonitoring ? .green : .gray)
                 
                 Spacer()
                 
-                Button(appState.isMonitoring ? "停止监控" : "开始监控") {
+                Button(appState.isMonitoring ? L[LocalizedStringKey.stopMonitoring] : L[LocalizedStringKey.startMonitoring]) {
                     toggleMonitoring()
                 }
                 .buttonStyle(.borderedProminent)
@@ -78,31 +81,31 @@ struct GeneralSettingsView: View {
             Divider()
             
             VStack(alignment: .leading, spacing: 10) {
-                Text("状态")
+                Text(L[LocalizedStringKey.status])
                     .font(.headline)
                 
                 HStack {
-                    Text("摄像头权限:")
-                    Text(PermissionManager.shared.hasCameraPermission ? "已授权" : "未授权")
+                    Text(L[LocalizedStringKey.cameraPermission])
+                    Text(PermissionManager.shared.hasCameraPermission ? L[LocalizedStringKey.authorized] : L[LocalizedStringKey.unauthorized])
                         .foregroundColor(PermissionManager.shared.hasCameraPermission ? .green : .red)
                 }
                 
                 HStack {
-                    Text("Telegram 连接:")
-                    Text(settings.telegramBotToken != nil ? "已配置" : "未配置")
+                    Text(L[LocalizedStringKey.telegramConnection])
+                    Text(settings.telegramBotToken != nil ? L[LocalizedStringKey.configured] : L[LocalizedStringKey.notConfigured])
                         .foregroundColor(settings.telegramBotToken != nil ? .green : .orange)
                 }
                 
                 if let lastCapture = appState.lastCaptureTime {
                     HStack {
-                        Text("最后捕获:")
+                        Text(L[LocalizedStringKey.lastCapture])
                         Text("\(lastCapture, formatter: dateFormatter)")
                             .foregroundColor(.secondary)
                     }
                 }
                 
                 HStack {
-                    Text("捕获次数:")
+                    Text(L[LocalizedStringKey.captureCount])
                     Text("\(appState.captureCount)")
                         .foregroundColor(.secondary)
                 }
@@ -110,7 +113,18 @@ struct GeneralSettingsView: View {
             
             Divider()
             
-            Toggle("开机自动启动", isOn: $settings.launchAtLogin)
+            HStack {
+                Text(L[LocalizedStringKey.language])
+                Picker("", selection: $localization.currentLanguage) {
+                    ForEach(Language.allCases, id: \.self) { language in
+                        Text(language.displayName).tag(language)
+                    }
+                }
+                .pickerStyle(MenuPickerStyle())
+                .frame(width: 150)
+            }
+            
+            Toggle(L[LocalizedStringKey.launchAtLogin], isOn: $settings.launchAtLogin)
                 .onChange(of: settings.launchAtLogin) { _, newValue in
                     if newValue {
                         AppSettings.shared.registerLoginItem()
@@ -119,12 +133,12 @@ struct GeneralSettingsView: View {
                     }
                 }
             
-            Toggle("自动开始监控", isOn: $settings.autoStartMonitoring)
-                .help("启动应用时自动开始监控")
+            Toggle(L[LocalizedStringKey.autoStartMonitoring], isOn: $settings.autoStartMonitoring)
+                .help(L[LocalizedStringKey.autoStartMonitoring])
             
             HStack {
                 if isSelfTesting {
-                    Button("取消自检") {
+                    Button(L[LocalizedStringKey.cancelTest]) {
                         CaptureService.shared.cancelTest()
                         isSelfTesting = false
                     }
@@ -135,7 +149,7 @@ struct GeneralSettingsView: View {
                         .scaleEffect(0.8)
                         .padding(.leading, 5)
                 } else {
-                    Button("一键自检") {
+                    Button(L[LocalizedStringKey.selfTest]) {
                         isSelfTesting = true
                         Task {
                             await performSelfTest()
@@ -145,23 +159,23 @@ struct GeneralSettingsView: View {
                     .buttonStyle(.bordered)
                 }
                 
-                Button("测试解锁录像") {
+                Button(L[LocalizedStringKey.testUnlockRecording]) {
                     Task {
                         await CaptureService.shared.testUnlockRecording()
                     }
                 }
                 .buttonStyle(.bordered)
-                .help("测试解锁录像功能")
+                .help(L[LocalizedStringKey.testUnlockRecording])
                 
-                Button("清除统计") {
+                Button(L[LocalizedStringKey.clearStats]) {
                     clearStats()
                 }
                 .buttonStyle(.bordered)
             }
-            
-            Spacer()
+            }
+            .padding()
+            .frame(maxWidth: .infinity, alignment: .leading)
         }
-        .padding()
     }
     
     private var dateFormatter: DateFormatter {
@@ -207,29 +221,29 @@ struct CaptureSettingsView: View {
     
     var body: some View {
         Form {
-            Section("抓拍设置") {
+            Section(L[LocalizedStringKey.captureSettings]) {
                 HStack {
-                    Text("息屏/锁屏抓拍间隔")
+                    Text(L[LocalizedStringKey.lockScreenCaptureInterval])
                     Slider(value: $settings.captureInterval, in: 5...60, step: 5)
-                    Text("\(Int(settings.captureInterval))秒")
+                    Text("\(Int(settings.captureInterval))\(L[LocalizedStringKey.seconds])")
                         .frame(width: 50)
                 }
                 
                 HStack {
-                    Text("唤醒录影时长")
+                    Text(L[LocalizedStringKey.wakeVideoLength])
                     Slider(value: $settings.videoDuration, in: 5...30, step: 5)
-                    Text("\(Int(settings.videoDuration))秒")
+                    Text("\(Int(settings.videoDuration))\(L[LocalizedStringKey.seconds])")
                         .frame(width: 50)
                 }
                 
-                Toggle("启用录屏功能", isOn: $settings.screenRecordingEnabled)
+                Toggle(L[LocalizedStringKey.enableScreenRecording], isOn: $settings.screenRecordingEnabled)
                 
-                Picker("图片格式", selection: $settings.imageFormat) {
+                Picker(L[LocalizedStringKey.imageFormat], selection: $settings.imageFormat) {
                     Text("JPEG").tag("jpeg")
                     Text("HEIF").tag("heif")
                 }
                 
-                Picker("视频质量", selection: $settings.videoQuality) {
+                Picker(L[LocalizedStringKey.videoQuality], selection: $settings.videoQuality) {
                     Text("720p").tag("720p")
                     Text("1080p").tag("1080p")
                     Text("4K").tag("4k")
@@ -245,30 +259,30 @@ struct DetectionSettingsView: View {
     
     var body: some View {
         Form {
-            Section("人形检测") {
-                Toggle("启用人形检测", isOn: $settings.humanDetectionEnabled)
+            Section(L[LocalizedStringKey.humanDetection]) {
+                Toggle(L[LocalizedStringKey.enableHumanDetection], isOn: $settings.humanDetectionEnabled)
                 
                 HStack {
-                    Text("置信度阈值")
+                    Text(L[LocalizedStringKey.confidenceThreshold])
                     Slider(value: $settings.humanDetectionThreshold, in: 0.3...1.0, step: 0.1)
                     Text(String(format: "%.1f", settings.humanDetectionThreshold))
                         .frame(width: 50)
                 }
             }
             
-            Section("运动检测") {
-                Toggle("启用运动检测", isOn: $settings.motionDetectionEnabled)
+            Section(L[LocalizedStringKey.motionDetection]) {
+                Toggle(L[LocalizedStringKey.enableMotionDetection], isOn: $settings.motionDetectionEnabled)
                 
                 HStack {
-                    Text("灵敏度")
+                    Text(L[LocalizedStringKey.sensitivity])
                     Slider(value: $settings.motionDetectionSensitivity, in: 0.01...0.1, step: 0.01)
                     Text(String(format: "%.0f%%", settings.motionDetectionSensitivity * 100))
                         .frame(width: 50)
                 }
             }
             
-            Section("环境变化") {
-                Toggle("启用环境变化检测", isOn: $settings.environmentChangeDetectionEnabled)
+            Section(L[LocalizedStringKey.environmentChange]) {
+                Toggle(L[LocalizedStringKey.enableEnvironmentDetection], isOn: $settings.environmentChangeDetectionEnabled)
             }
         }
         .padding()
@@ -284,7 +298,7 @@ struct TelegramSettingsView: View {
     
     var body: some View {
         Form {
-            Section("Telegram Bot 配置") {
+            Section(L[LocalizedStringKey.telegramBotConfig]) {
                 SecureField("Bot Token", text: $botToken)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                 
@@ -292,24 +306,24 @@ struct TelegramSettingsView: View {
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                 
                 HStack {
-                    Button("保存配置") {
+                    Button(L[LocalizedStringKey.saveConfig]) {
                         saveConfiguration()
                     }
                     .buttonStyle(.borderedProminent)
                     
-                    Button("测试连接") {
+                    Button(L[LocalizedStringKey.testConnection]) {
                         testConnection()
                     }
                 }
             }
             
-            Section("发送选项") {
-                Toggle("发送前先保存到本地", isOn: $settings.saveBeforeSending)
+            Section(L[LocalizedStringKey.sendOptions]) {
+                Toggle(L[LocalizedStringKey.saveBeforeSending], isOn: $settings.saveBeforeSending)
                 
-                Toggle("使用代理", isOn: $settings.useProxy)
+                Toggle(L[LocalizedStringKey.useProxy], isOn: $settings.useProxy)
                 
                 if settings.useProxy {
-                    TextField("代理地址", text: $settings.proxyAddress)
+                    TextField(L[LocalizedStringKey.proxyAddress], text: $settings.proxyAddress)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                 }
             }
@@ -319,8 +333,8 @@ struct TelegramSettingsView: View {
             botToken = settings.telegramBotToken ?? ""
             chatId = settings.telegramChatId ?? ""
         }
-        .alert("提示", isPresented: $showingAlert) {
-            Button("确定", role: .cancel) { }
+        .alert(L[LocalizedStringKey.hint], isPresented: $showingAlert) {
+            Button(L[LocalizedStringKey.ok], role: .cancel) { }
         } message: {
             Text(alertMessage)
         }
@@ -337,14 +351,14 @@ struct TelegramSettingsView: View {
             settings.telegramChatId = chatId
         }
         
-        alertMessage = "配置已保存"
+        alertMessage = L[LocalizedStringKey.configSaved]
         showingAlert = true
     }
     
     private func testConnection() {
         Task {
             let success = await TelegramUploader.shared.testConnection()
-            alertMessage = success ? "连接成功" : "连接失败，请检查配置"
+            alertMessage = success ? L[LocalizedStringKey.connectionSuccess] : L[LocalizedStringKey.connectionFailed]
             showingAlert = true
         }
     }
@@ -355,21 +369,21 @@ struct PrivacySettingsView: View {
     
     var body: some View {
         Form {
-            Section("本地存储") {
-                Toggle("本地加密存储", isOn: $settings.encryptLocalStorage)
+            Section(L[LocalizedStringKey.localStorage]) {
+                Toggle(L[LocalizedStringKey.encryptLocalStorage], isOn: $settings.encryptLocalStorage)
                 
-                Toggle("发送成功后删除本地文件", isOn: $settings.deleteAfterSending)
+                Toggle(L[LocalizedStringKey.deleteAfterSending], isOn: $settings.deleteAfterSending)
                 
                 HStack {
-                    Text("本地保留天数")
+                    Text(L[LocalizedStringKey.retentionDays])
                     Slider(value: $settings.localRetentionDays, in: 1...30, step: 1)
-                    Text("\(Int(settings.localRetentionDays))天")
+                    Text("\(Int(settings.localRetentionDays))\(L[LocalizedStringKey.days])")
                         .frame(width: 50)
                 }
             }
             
-            Section("数据安全") {
-                Button("清除所有本地数据") {
+            Section(L[LocalizedStringKey.dataSecurity]) {
+                Button(L[LocalizedStringKey.clearAllData]) {
                     clearLocalData()
                 }
                 .foregroundColor(.red)
@@ -390,23 +404,23 @@ struct AdvancedSettingsView: View {
     
     var body: some View {
         Form {
-            Section("日志") {
-                Picker("日志级别", selection: $logLevel) {
-                    Text("调试").tag("debug")
-                    Text("信息").tag("info")
-                    Text("警告").tag("warning")
-                    Text("错误").tag("error")
+            Section(L[LocalizedStringKey.logs]) {
+                Picker(L[LocalizedStringKey.logLevel], selection: $logLevel) {
+                    Text(L[LocalizedStringKey.debug]).tag("debug")
+                    Text(L[LocalizedStringKey.info]).tag("info")
+                    Text(L[LocalizedStringKey.warning]).tag("warning")
+                    Text(L[LocalizedStringKey.error]).tag("error")
                 }
                 
-                Button("导出日志") {
+                Button(L[LocalizedStringKey.exportLogs]) {
                     exportLogs()
                 }
             }
             
-            Section("诊断") {
+            Section(L[LocalizedStringKey.diagnostics]) {
                 HStack {
                     if isTestingCamera {
-                        Button("取消测试") {
+                        Button(L[LocalizedStringKey.cancel]) {
                             CaptureService.shared.cancelTest()
                             isTestingCamera = false
                         }
@@ -416,7 +430,7 @@ struct AdvancedSettingsView: View {
                             .scaleEffect(0.8)
                             .padding(.leading, 5)
                     } else {
-                        Button("触发测试抓拍") {
+                        Button(L[LocalizedStringKey.triggerTestCapture]) {
                             isTestingCamera = true
                             Task {
                                 await CaptureService.shared.captureTestSnapshot()
@@ -426,7 +440,7 @@ struct AdvancedSettingsView: View {
                     }
                 }
                 
-                Button("测试唤醒录屏") {
+                Button(L[LocalizedStringKey.testWakeRecording]) {
                     Task {
                         Logger.shared.log("Testing wake/unlock recording", level: .info)
                         await CaptureService.shared.captureTriggeredEvidence(
@@ -437,7 +451,7 @@ struct AdvancedSettingsView: View {
                 }
                 .buttonStyle(.bordered)
                 
-                Button("查看系统信息") {
+                Button(L[LocalizedStringKey.viewSystemInfo]) {
                     showSystemInfo()
                 }
             }

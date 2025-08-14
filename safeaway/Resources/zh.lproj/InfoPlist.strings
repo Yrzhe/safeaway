@@ -1,0 +1,12 @@
+/* InfoPlist.strings (Chinese) */
+
+CFBundleDisplayName = "SafeAway";
+CFBundleName = "SafeAway";
+NSHumanReadableCopyright = "© 2024 SafeAway. 保留所有权利。";
+
+/* Privacy Usage Descriptions */
+NSCameraUsageDescription = "为在您离席时进行安防取证，需要访问摄像头进行抓拍。";
+NSMicrophoneUsageDescription = "为录制短视频证据，需要获取麦克风权限。";
+NSLocationUsageDescription = "用于识别设备在不同地点被移动时的异常。";
+NSLocationAlwaysAndWhenInUseUsageDescription = "用于识别设备在不同地点被移动时的异常。";
+NSLocationAlwaysUsageDescription = "用于识别设备在不同地点被移动时的异常。";

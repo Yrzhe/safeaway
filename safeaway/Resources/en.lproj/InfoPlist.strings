@@ -1,0 +1,5 @@
+/* InfoPlist.strings (English) */
+
+CFBundleDisplayName = "SafeAway";
+CFBundleName = "SafeAway";
+NSHumanReadableCopyright = "© 2024 SafeAway. All rights reserved.";
