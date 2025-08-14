@@ -1,0 +1,24 @@
+# Xcode 16 File System Synchronization Exclusions
+# These files should NOT be included in Copy Bundle Resources
+
+# Info.plist is handled separately via INFOPLIST_FILE build setting
+Info.plist
+
+# Entitlements are code signing resources, not bundle resources
+*.entitlements
+safeaway.entitlements
+
+# Ignore the ignore file itself
+.xcodeignore
+
+# Source code files (already compiled, don't need in resources)
+*.swift
+*.m
+*.h
+*.mm
+*.cpp
+
+# Other development files
+*.md
+*.sh
+*.py
