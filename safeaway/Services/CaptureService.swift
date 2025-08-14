@@ -489,7 +489,7 @@ final class CaptureService: NSObject, @unchecked Sendable {
         
         lastCapturedImage = image
         
-        let priority: TelegramUploader.Priority = hasHuman ? .high : .normal
+        let priority: NotificationPriority = hasHuman ? .high : .normal
         let tags = [hasHuman ? "human" : nil, hasMotion ? "motion" : nil].compactMap { $0 }
         
         let caption = buildCaption(type: .snapshot, tags: tags)
@@ -498,8 +498,8 @@ final class CaptureService: NSObject, @unchecked Sendable {
            let bitmapRep = NSBitmapImageRep(data: imageData),
            let jpegData = bitmapRep.representation(using: .jpeg, properties: [.compressionFactor: 0.8]) {
             
-            await TelegramUploader.shared.uploadPhoto(
-                data: jpegData,
+            await NotificationManager.shared.sendNotification(
+                photo: jpegData,
                 caption: caption,
                 priority: priority
             )
@@ -529,10 +529,10 @@ final class CaptureService: NSObject, @unchecked Sendable {
         
         let caption = buildCaption(type: type, tags: [])
         Logger.shared.log("📝 Video caption: \(caption)", level: .info)
-        Logger.shared.log("🚀 Uploading video to Telegram with high priority...", level: .info)
+        Logger.shared.log("🚀 Uploading video with high priority...", level: .info)
         
-        await TelegramUploader.shared.uploadVideo(
-            url: url,
+        await NotificationManager.shared.sendNotification(
+            video: url,
             caption: caption,
             priority: type == .wakeUnlock ? .high : .normal
         )

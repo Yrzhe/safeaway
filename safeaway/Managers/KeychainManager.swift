@@ -7,6 +7,9 @@ class KeychainManager {
     private let service = "com.safeaway.app"
     private let telegramTokenKey = "telegram_bot_token"
     private let telegramChatIdKey = "telegram_chat_id"
+    private let feishuAccessTokenKey = "feishu_access_token"
+    private let feishuReceiveIdKey = "feishu_receive_id"
+    private let wechatWorkWebhookUrlKey = "wechat_work_webhook_url"
     
     private init() {}
     
@@ -26,9 +29,38 @@ class KeychainManager {
         return load(forKey: telegramChatIdKey)
     }
     
+    // Feishu methods
+    func saveFeishuAccessToken(_ token: String) {
+        save(token, forKey: feishuAccessTokenKey)
+    }
+    
+    func getFeishuAccessToken() -> String? {
+        return load(forKey: feishuAccessTokenKey)
+    }
+    
+    func saveFeishuReceiveId(_ id: String) {
+        save(id, forKey: feishuReceiveIdKey)
+    }
+    
+    func getFeishuReceiveId() -> String? {
+        return load(forKey: feishuReceiveIdKey)
+    }
+    
+    // WeChat Work methods
+    func saveWeChatWorkWebhookUrl(_ url: String) {
+        save(url, forKey: wechatWorkWebhookUrlKey)
+    }
+    
+    func getWeChatWorkWebhookUrl() -> String? {
+        return load(forKey: wechatWorkWebhookUrlKey)
+    }
+    
     func deleteAll() {
         delete(forKey: telegramTokenKey)
         delete(forKey: telegramChatIdKey)
+        delete(forKey: feishuAccessTokenKey)
+        delete(forKey: feishuReceiveIdKey)
+        delete(forKey: wechatWorkWebhookUrlKey)
     }
     
     private func save(_ value: String, forKey key: String) {

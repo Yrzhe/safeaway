@@ -29,6 +29,24 @@ class AppSettings: ObservableObject {
     @AppStorage("launchAtLogin") var launchAtLogin: Bool = false
     @AppStorage("autoStartMonitoring") var autoStartMonitoring: Bool = false
     
+    // Notification platforms
+    @AppStorage("enabledNotificationPlatforms") private var enabledPlatformsData: Data = Data()
+    
+    var enabledNotificationPlatforms: Set<NotificationPlatform> {
+        get {
+            guard let platforms = try? JSONDecoder().decode(Set<NotificationPlatform>.self, from: enabledPlatformsData) else {
+                return []
+            }
+            return platforms
+        }
+        set {
+            if let data = try? JSONEncoder().encode(newValue) {
+                enabledPlatformsData = data
+            }
+        }
+    }
+    
+    // Telegram settings
     var telegramBotToken: String? {
         get { KeychainManager.shared.getTelegramToken() }
         set {
@@ -43,6 +61,42 @@ class AppSettings: ObservableObject {
         set {
             if let chatId = newValue {
                 KeychainManager.shared.saveTelegramChatId(chatId)
+            }
+        }
+    }
+    
+    // Feishu settings
+    var feishuAccessToken: String? {
+        get { KeychainManager.shared.getFeishuAccessToken() }
+        set {
+            if let token = newValue {
+                KeychainManager.shared.saveFeishuAccessToken(token)
+            }
+        }
+    }
+    
+    @AppStorage("feishuReceiveIdType") private var feishuReceiveIdTypeRaw: String = FeishuReceiveIdType.userId.rawValue
+    
+    var feishuReceiveIdType: FeishuReceiveIdType {
+        get { FeishuReceiveIdType(rawValue: feishuReceiveIdTypeRaw) ?? .userId }
+        set { feishuReceiveIdTypeRaw = newValue.rawValue }
+    }
+    
+    var feishuReceiveId: String? {
+        get { KeychainManager.shared.getFeishuReceiveId() }
+        set {
+            if let id = newValue {
+                KeychainManager.shared.saveFeishuReceiveId(id)
+            }
+        }
+    }
+    
+    // WeChat Work settings
+    var wechatWorkWebhookUrl: String? {
+        get { KeychainManager.shared.getWeChatWorkWebhookUrl() }
+        set {
+            if let url = newValue {
+                KeychainManager.shared.saveWeChatWorkWebhookUrl(url)
             }
         }
     }

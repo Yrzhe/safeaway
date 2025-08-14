@@ -39,6 +39,23 @@
 "language" = "语言";
 "select_language" = "选择语言";
 
+/* Notification Settings */
+"notifications" = "通知";
+"select_notification_platforms" = "选择通知平台";
+"configure" = "配置";
+"configuration" = "配置";
+"test_all_enabled_platforms" = "测试所有已启用平台";
+"testing" = "测试中";
+"test_results" = "测试结果";
+"test_complete" = "测试完成";
+"platforms_test_success" = "个平台测试成功";
+"save" = "保存";
+"test" = "测试";
+"access_token" = "访问凭证";
+"receive_id_type" = "接收者 ID 类型";
+"receive_id" = "接收者 ID";
+"webhook_url" = "Webhook URL";
+
 /* Settings - Capture */
 "capture" = "采集";
 "capture_settings" = "抓拍设置";

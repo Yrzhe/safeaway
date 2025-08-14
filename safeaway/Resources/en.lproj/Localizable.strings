@@ -39,6 +39,23 @@
 "language" = "Language";
 "select_language" = "Select Language";
 
+/* Notification Settings */
+"notifications" = "Notifications";
+"select_notification_platforms" = "Select Notification Platforms";
+"configure" = "Configure";
+"configuration" = "Configuration";
+"test_all_enabled_platforms" = "Test All Enabled Platforms";
+"testing" = "Testing";
+"test_results" = "Test Results";
+"test_complete" = "Test Complete";
+"platforms_test_success" = "platforms tested successfully";
+"save" = "Save";
+"test" = "Test";
+"access_token" = "Access Token";
+"receive_id_type" = "Receive ID Type";
+"receive_id" = "Receive ID";
+"webhook_url" = "Webhook URL";
+
 /* Settings - Capture */
 "capture" = "Capture";
 "capture_settings" = "Capture Settings";

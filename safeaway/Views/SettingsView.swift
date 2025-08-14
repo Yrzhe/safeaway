@@ -27,9 +27,9 @@ struct SettingsView: View {
                 }
                 .tag(2)
             
-            TelegramSettingsView()
+            NotificationSettingsView()
                 .tabItem {
-                    Label(L[LocalizedStringKey.upload], systemImage: "paperplane")
+                    Label(L[LocalizedStringKey.notifications], systemImage: "bell")
                 }
                 .tag(3)
             
